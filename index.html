@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Professional portfolio of Shaikh Shahnawaz Ahmed - Full Stack Developer and BSc IT Student">
+    <meta name="keywords" content="Full Stack Developer, Web Developer, Portfolio, Shaikh Shahnawaz Ahmed, BSc IT">
+    <title>Shaikh Shahnawaz Ahmed | Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #ffffff;
+            --accent: #3b82f6;
+            --text: #1a1a1a;
+            --bg: #ffffff;
+            --border: rgba(0, 0, 0, 0.1);
+            --button-bg: #ffffff;
+            --button-text: #1a1a1a;
+            --button-border: #1a1a1a;
+            --card-bg: #ffffff;
+            --section-bg: #f8f9fa;
+            --gray-text: #4b5563;
+        }
+
+
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .typewriter {
+            border-right: 2px solid var(--primary);
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: var(--primary);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            transition: width 1.5s ease;
+        }
+
+        .nav-link {
+            position: relative;
+            color: inherit;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-checkbox:checked {
+            right: 0;
+            background-color: var(--button-text);
+        }
+
+        .toggle-checkbox:checked+.toggle-label {
+            background-color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .toggle-label {
+            background-color: var(--button-bg);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-indicator {
+            height: 3px;
+            background-color: var(--accent);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 50;
+            transition: width 0.2s ease;
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--secondary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-900 dark:bg-black dark:text-white">
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-sm z-40 transition-all duration-300 dark:bg-black">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-gray-900 dark:text-white">SHAIKH SHAHNAWAZ</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-900 dark:text-white">Home</a>
+                    <a href="#about" class="nav-link text-gray-900 dark:text-white">About</a>
+                    <a href="#skills" class="nav-link text-gray-900 dark:text-white">Skills</a>
+                    <a href="#experience" class="nav-link text-gray-900 dark:text-white">Experience</a>
+                    <a href="#projects" class="nav-link text-gray-900 dark:text-white">Projects</a>
+                    <a href="#contact" class="nav-link text-gray-900 dark:text-white">Contact</a>
+
+                    <!-- Dark Mode Toggle -->
+                    <div class="flex items-center">
+                        <button id="theme-toggle" type="button"
+                            class="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg p-2.5">
+                            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor"
+                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                            </svg>
+                            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor"
+                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                    fill-rule="evenodd" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-900 dark:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-black shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 dark:text-white">Home</a>
+                <a href="#about"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 dark:text-white">About</a>
+                <a href="#skills"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 dark:text-white">Skills</a>
+                <a href="#experience"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 dark:text-white">Experience</a>
+                <a href="#projects"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 dark:text-white">Projects</a>
+                <a href="#contact"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 dark:text-white">Contact</a>
+                <div class="px-3 py-2 flex items-center">
+                    <button id="theme-toggle-mobile" type="button"
+                        class="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg p-2.5">
+                        <svg id="theme-toggle-dark-icon-mobile" class="hidden w-5 h-5" fill="currentColor"
+                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                        <svg id="theme-toggle-light-icon-mobile" class="hidden w-5 h-5" fill="currentColor"
+                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    <span class="ml-2">Toggle Theme</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 fade-in">Shaikh Shahnawaz Ahmed</h1>
+                <h2 class="text-xl md:text-2xl font-semibold mb-6 fade-in">Full Stack Developer | Tech Enthusiast | BSc
+                    IT Student</h2>
+                <p class="text-lg md:text-xl mb-8 fade-in">"Building smart digital experiences with passion and
+                    precision."</p>
+
+                <div class="h-12 mb-8 fade-in">
+                    <span id="typewriter" class="typewriter text-xl md:text-2xl font-medium"></span>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4 fade-in">
+                    <a href="#contact"
+                        class="px-6 py-3 bg-white dark:bg-gray-800 text-black dark:text-white border border-black dark:border-white rounded-lg font-medium hover:opacity-80 transition duration-300">
+                        Contact Me
+                    </a>
+                    <a href="#"
+                        class="px-6 py-3 border-2 border-black dark:border-white rounded-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-900 transition duration-300">
+                        Download Resume
+                    </a>
+                    <a href="#projects"
+                        class="px-6 py-3 border-2 border-black dark:border-white rounded-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-900 transition duration-300">
+                        View Projects
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-100 dark:bg-black">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">About Me</h2>
+
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/3 flex justify-center fade-in">
+                    <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-black dark:border-white">
+                        <img src="https://via.placeholder.com/400x400" alt="Shaikh Shahnawaz Ahmed"
+                            class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <div class="w-full md:w-2/3 fade-in">
+                    <p class="text-lg mb-6">
+                        I'm a passionate Full Stack Developer based in Mumbai with a strong foundation in modern web
+                        technologies.
+                        I specialize in creating responsive, intuitive, and beautiful digital products.
+                        With a curious mind and continuous learning mindset, I love solving real-world problems through
+                        code.
+                    </p>
+                    <p class="text-lg mb-6">
+                        Currently pursuing my BSc in Information Technology, I combine academic knowledge with practical
+                        experience
+                        gained through freelance projects and personal development. My approach blends technical
+                        expertise with
+                        creative problem-solving to deliver exceptional user experiences.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>Mumbai, India</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-graduation-cap mr-2"></i>
+                            <span>BSc IT Student</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-code mr-2"></i>
+                            <span>Full Stack Development</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">My Skills</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Frontend Skills -->
+                <div class="fade-in">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-laptop-code mr-3"></i> Frontend Development
+                    </h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>HTML5</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>CSS3 & Tailwind</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>JavaScript</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>React.js</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend Skills -->
+                <div class="fade-in">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-server mr-3"></i> Backend & Tools
+                    </h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Node.js & Express</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>MongoDB</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Git & GitHub</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Responsive Design</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-100 dark:bg-black">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">My Experience</h2>
+
+            <div class="space-y-8">
+                <!-- Freelance Experience -->
+                <div class="fade-in">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="text-xl font-semibold">Freelance Developer</h3>
+                            <span class="text-[var(--gray-text)]">2022 - Present | Remote</span>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Built and maintained web applications for small businesses and personal clients</li>
+                            <li>Implemented responsive designs and optimized performance for better user experience</li>
+                            <li>Collaborated with clients to understand requirements and deliver tailored solutions</li>
+                            <li>Deployed applications using modern CI/CD practices</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- College Tech Club -->
+                <div class="fade-in">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="text-xl font-semibold">College Tech Club Member</h3>
+                            <span class="text-[var(--gray-text)]">2021 - Present</span>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Helped organize coding workshops and hackathons for students</li>
+                            <li>Mentored junior students in web development fundamentals</li>
+                            <li>Participated in team projects and coding competitions</li>
+                            <li>Contributed to open-source projects as part of club initiatives</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Personal Projects -->
+                <div class="fade-in">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="text-xl font-semibold">Personal Projects</h3>
+                            <span class="text-[var(--gray-text)]">Ongoing</span>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Designed and deployed multiple web projects hosted on GitHub Pages</li>
+                            <li>Experimented with new technologies and frameworks to expand skill set</li>
+                            <li>Created portfolio projects to showcase abilities and learning progress</li>
+                            <li>Implemented best practices in code organization and documentation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">My Projects</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Nafri Project -->
+                <div
+                    class="project-card fade-in bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-md border border-gray-200 dark:border-gray-800">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://via.placeholder.com/600x400" alt="Nafri Project"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Nafri Perfume</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">A clean, responsive e-commerce website for
+                            premium perfumes with product listings and smooth navigation.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">HTML</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">CSS</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">JavaScript</span>
+                        </div>
+                        <a href="https://shaikhshahnawaz13.github.io/nafri/" target="_blank"
+                            class="inline-block px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300">
+                            View Project
+                        </a>
+                    </div>
+                </div>
+
+                <!-- TaskVerse Project -->
+                <div
+                    class="project-card fade-in bg-white dark:bg-[#1e293b] rounded-lg overflow-hidden shadow-md border border-gray-200 dark:border-gray-600">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://via.placeholder.com/600x400" alt="TaskVerse Project"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-black dark:text-white">TaskVerse</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">A modern to-do application with local storage,
+                            priority tagging, and smooth animations for task management.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">React</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">Tailwind CSS</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">Local Storage</span>
+                        </div>
+                        <a href="#"
+                            class="inline-block px-4 py-2 border-2 border-black dark:border-white rounded hover:bg-gray-100 dark:hover:bg-gray-900 transition duration-300">
+                            Coming Soon
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PortaBlog Project -->
+                <div
+                    class="project-card fade-in bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md border border-gray-200 dark:border-gray-700">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://via.placeholder.com/600x400" alt="PortaBlog Project"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">PortaBlog</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">A minimal blog application with markdown
+                            support, dark mode, and responsive design for content creators.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">Node.js</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">Express</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">MongoDB</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">Markdown</span>
+                        </div>
+                        <a href="#"
+                            class="inline-block px-4 py-2 border-2 border-black dark:border-white rounded hover:bg-gray-100 dark:hover:bg-gray-900 transition duration-300">
+                            Coming Soon
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="py-20 bg-gray-100 dark:bg-black">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">My Resume</h2>
+
+            <div class="flex justify-center mb-12 fade-in">
+                <a href="#"
+                    class="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300 flex items-center">
+                    <i class="fas fa-download mr-2"></i> Download Full Resume (PDF)
+                </a>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Left Column -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 border-b pb-2">Education</h3>
+                        <div class="mb-6">
+                            <h4 class="text-lg font-medium">BSc in Information Technology</h4>
+                            <p class="text-gray-600 dark:text-gray-300">University of Mumbai</p>
+                            <p class="text-sm text-gray-500">2021 - 2024</p>
+                        </div>
+
+                        <h3 class="text-2xl font-semibold mb-4 border-b pb-2">Certifications</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-medium">Full Stack Web Development</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Online Platform</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">JavaScript Algorithms and Data Structures</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">FreeCodeCamp</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Responsive Web Design</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">FreeCodeCamp</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 border-b pb-2">Skills Summary</h3>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <h4 class="font-medium">Frontend</h4>
+                                <ul class="list-disc pl-5 text-sm">
+                                    <li>HTML5 & CSS3</li>
+                                    <li>JavaScript (ES6+)</li>
+                                    <li>React.js</li>
+                                    <li>Responsive Design</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Backend</h4>
+                                <ul class="list-disc pl-5 text-sm">
+                                    <li>Node.js</li>
+                                    <li>Express</li>
+                                    <li>MongoDB</li>
+                                    <li>REST APIs</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-semibold mb-4 border-b pb-2">Languages</h3>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full">English (Fluent)</div>
+                            <div class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full">Hindi (Native)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">What People Say</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div
+                    class="fade-in bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-600">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://via.placeholder.com/100x100" alt="Client"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Rahul Sharma</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">Small Business Owner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        "Shahnawaz's e-commerce design impressed me—clean, fast, and user-focused. He delivered exactly
+                        what we needed and provided excellent post-launch support."
+                    </p>
+                </div>
+
+                <div
+                    class="fade-in bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://via.placeholder.com/100x100" alt="Client"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Priya Patel</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">Tech Club Coordinator</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        "As a mentor in our college tech club, Shahnawaz has shown exceptional technical skills and
+                        patience in explaining complex concepts to beginners."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 bg-gray-100 dark:bg-black">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">From My Blog</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div
+                    class="fade-in bg-white dark:bg-[#1e293b] rounded-lg overflow-hidden shadow-md border border-gray-200 dark:border-gray-600">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://via.placeholder.com/600x400" alt="Blog Post"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-black dark:text-white">Why I Chose Tech as My Career
+                            Path</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Exploring my journey into technology and what
+                            keeps me motivated in this ever-evolving field.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-700 dark:text-gray-300">March 15, 2023</span>
+                            <a href="#" class="text-sm font-medium hover:underline">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="fade-in bg-white dark:bg-[#1e293b] rounded-lg overflow-hidden shadow-md border border-gray-200 dark:border-gray-600">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://via.placeholder.com/600x400" alt="Blog Post"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-black dark:text-white">Top 5 Mistakes Beginners Make
+                            in HTML</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Common pitfalls in HTML development and how to
+                            avoid them for cleaner, more semantic code.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-700 dark:text-gray-300">January 28, 2023</span>
+                            <a href="#" class="text-sm font-medium hover:underline">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 fade-in">
+                <a href="#"
+                    class="px-6 py-3 border-2 border-black dark:border-white rounded-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-300">
+                    View All Blog Posts
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in">Get In Touch</h2>
+
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="w-full md:w-1/2 fade-in">
+                    <form action="https://formsubmit.co/shaikhshahnwaaz13@gmail.com" method="POST" class="space-y-6">
+                        <div>
+                            <label for="name" class="block mb-2 font-medium">Your Name</label>
+                            <input type="text" id="name" name="name"
+                                class="w-full px-4 py-2 border-2 border-black dark:border-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700"
+                                required>
+                        </div>
+                        <div>
+                            <label for="email" class="block mb-2 font-medium">Your Email</label>
+                            <input type="email" id="email" name="email"
+                                class="w-full px-4 py-2 border-2 border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800"
+                                required>
+                        </div>
+                        <div>
+                            <label for="message" class="block mb-2 font-medium">Your Message</label>
+                            <textarea id="message" name="message" rows="5"
+                                class="w-full px-4 py-2 border-2 border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800"
+                                required></textarea>
+                        </div>
+
+                        <!-- Optional Hidden Inputs -->
+<input type="hidden" name="_next" value="https://shaikhshahnawaz13.github.io/portfolio/thank-you.html">
+                        <input type="hidden" name="_captcha" value="false">
+
+                        <button type="submit"
+                            class="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300">
+                            Send Message
+                        </button>
+                    </form>
+
+                </div>
+
+                <div class="w-full md:w-1/2 fade-in">
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-semibold">Contact Information</h3>
+                        <p>Feel free to reach out to me for collaborations, job opportunities, or just to say hello!</p>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope mr-4 text-xl"></i>
+                                <span>shaikhshahnwaaz13@gmail.com</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-linkedin mr-4 text-xl"></i>
+                                <a href="https://linkedin.com/in/shaikh-shahnwaaz" target="_blank"
+                                    class="hover:underline">linkedin.com/in/shaikh-shahnwaaz</a>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-github mr-4 text-xl"></i>
+                                <a href="https://github.com/shaikhshahnawaz13" target="_blank"
+                                    class="hover:underline">github.com/shaikhshahnawaz13</a>
+                            </div>
+                        </div>
+
+                        <div class="pt-6">
+                            <h4 class="font-medium mb-4">Let's Connect</h4>
+                            <div class="flex space-x-4">
+                                <a href="#"
+                                    class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-300">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#"
+                                    class="w-10 h-10 rounded-full border-2 border-black dark:border-white flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#"
+                                    class="w-10 h-10 rounded-full border-2 border-black dark:border-white flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-300">
+                                    <i class="fab fa-discord"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-900 dark:bg-black text-white dark:text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-xl font-bold">SHAIKH SHAHNAWAZ</span>
+                    <p class="text-sm mt-1">Full Stack Developer & Tech Enthusiast</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#home"
+                        class="hover:text-gray-300 dark:hover:text-gray-700 transition duration-300">Home</a>
+                    <a href="#about"
+                        class="hover:text-gray-300 dark:hover:text-gray-700 transition duration-300">About</a>
+                    <a href="#projects"
+                        class="hover:text-gray-300 dark:hover:text-gray-700 transition duration-300">Projects</a>
+                    <a href="#contact"
+                        class="hover:text-gray-300 dark:hover:text-gray-700 transition duration-300">Contact</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 dark:border-gray-200 text-center text-sm">
+                <p>© 2023 Shaikh Shahnawaz Ahmed. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', function () {
+            const preloader = document.querySelector('.preloader');
+            preloader.classList.add('fade-out');
+
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+        const darkIconMobile = document.getElementById('theme-toggle-dark-icon-mobile');
+        const lightIconMobile = document.getElementById('theme-toggle-light-icon-mobile');
+
+        // Check for saved theme preference or use system preference
+        const storedTheme = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        // Apply initial theme
+        if (storedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            darkIcon.classList.remove('hidden');
+            darkIconMobile.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            lightIcon.classList.remove('hidden');
+            lightIconMobile.classList.remove('hidden');
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+            if (isDark) {
+                darkIcon.classList.remove('hidden');
+                lightIcon.classList.add('hidden');
+                darkIconMobile.classList.remove('hidden');
+                lightIconMobile.classList.add('hidden');
+            } else {
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
+                lightIconMobile.classList.remove('hidden');
+                darkIconMobile.classList.add('hidden');
+            }
+        }
+
+        // Event listeners
+        themeToggle.addEventListener('click', toggleTheme);
+        if (themeToggleMobile) {
+            themeToggleMobile.addEventListener('click', toggleTheme);
+        }
+
+        // Watch for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    darkIcon.classList.remove('hidden');
+                    lightIcon.classList.add('hidden');
+                    darkIconMobile.classList.remove('hidden');
+                    lightIconMobile.classList.add('hidden');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    lightIcon.classList.remove('hidden');
+                    darkIcon.classList.add('hidden');
+                    lightIconMobile.classList.remove('hidden');
+                    darkIconMobile.classList.add('hidden');
+                }
+            }
+        });
+
+        // Mobile Menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', function () {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Scroll Indicator
+        window.addEventListener('scroll', function () {
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            scrollIndicator.style.width = scrolled + '%';
+        });
+
+        // Scroll Animation
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        function checkScroll() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // Typewriter Effect
+        const typewriterElement = document.getElementById('typewriter');
+        const roles = ['Developer', 'Designer', 'Coder', 'Thinker', 'Problem Solver'];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 150;
+
+        function typeWriter() {
+            const currentRole = roles[roleIndex];
+
+            if (isDeleting) {
+                typewriterElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                typewriterElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 150;
+            }
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                isDeleting = true;
+                typingSpeed = 1000; // Pause at end
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typingSpeed = 500; // Pause before typing next
+            }
+
+            setTimeout(typeWriter, typingSpeed);
+        }
+
+        // Start the typewriter effect after a delay
+        setTimeout(typeWriter, 1000);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
