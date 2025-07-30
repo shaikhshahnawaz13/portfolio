@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-white text-black dark:bg-black dark:text-white">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 5 Mistakes Beginners Make in HTML</title>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --text-primary: #000000;
+            --cursor-color: rgba(255, 255, 255, 0.55);
+            --code-bg: #f3f4f6;
+            --transition-speed: 0.4s;
+        }
+
+        html.dark {
+            --bg-primary: #000000;
+            --text-primary: #ffffff;
+            --cursor-color: rgba(255, 255, 255, 0.55);
+            --code-bg: #111827;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom cursor */
+        .cursor {
+            position: fixed;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--cursor-color);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            mix-blend-mode: difference;
+            z-index: 9999;
+            transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--cursor-color);
+            opacity: 0.3;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            mix-blend-mode: difference;
+            z-index: 9998;
+            transition: transform 0.4s ease, width 0.4s ease, height 0.4s ease;
+        }
+
+        .cursor.active {
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+
+        .ink-trail {
+            position: fixed;
+            border-radius: 50%;
+            background: var(--cursor-color);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            mix-blend-mode: difference;
+            z-index: 9997;
+            opacity: 0;
+            animation: fadeInOut 2s forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0.5;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+        }
+
+        /* Yin-Yang animation */
+        .yin-yang {
+            animation: rotate 12s linear infinite;
+            transition: fill var(--transition-speed) ease, stroke var(--transition-speed) ease;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Scroll animations */
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .title-line {
+            width: 0;
+            height: 2px;
+            background: var(--text-primary);
+            transition: width 0.6s ease;
+        }
+
+        .section.visible .title-line {
+            width: 100%;
+        }
+
+        /* Bounce effect */
+        .bounce-effect {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .bounce-effect:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg) scale(1.1);
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+        }
+
+        /* Fallback animations for CDN */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translate3d(0, -20px, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-fadeInDown {
+            animation: fadeInDown 1s ease-out forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .animate-delay-300 {
+            animation-delay: 300ms;
+        }
+
+        .animate-delay-500 {
+            animation-delay: 500ms;
+        }
+
+
+        pre,
+        code {
+            background-color: var(--code-bg) !important;
+            color: var(--text-primary);
+        }
+
+        .p-6.rounded-lg {
+            background-color: var(--code-bg) !important;
+            color: var(--text-primary);
+        }
+        
+
+        :root {
+  --toggle-bg: #ffffff; /* light background */
+}
+
+html.dark {
+  --toggle-bg: #1f2937; /* dark background (Tailwind's gray-800) */
+}
+
+    </style>
+</head>
+
+<body class="transition-colors duration-400">
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+  <button id="themeToggle"
+  class="theme-toggle fixed top-6 right-6 z-50 p-2 rounded-full shadow-lg transition-colors duration-300 bg-[var(--toggle-bg)] hover:scale-110">
+
+
+   <!-- Light Mode Icon (Sun - shown in dark mode) -->
+<svg id="sunIcon" class="w-6 h-6 text-white hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+</svg>
+
+<!-- Dark Mode Icon (Moon - shown in light mode) -->
+<svg id="moonIcon" class="w-6 h-6 text-black hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+</svg>
+
+</button>
+
+
+
+    <header class="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center opacity-10 dark:opacity-20">
+            <svg class="yin-yang w-64 h-64 md:w-96 md:h-96" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
+                <path d="M50,5 a45,45 0 0 1 0,90 a22.5,22.5 0 0 1 0,-45 a22.5,22.5 0 0 0 0,-45" fill="currentColor" />
+                <circle cx="50" cy="27.5" r="5" class="fill-white dark:fill-black" />
+                <circle cx="50" cy="72.5" r="5" class="fill-black dark:fill-white" />
+            </svg>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 text-center opacity-0 animate-fadeInDown">
+            <span class="bounce-effect">Top 5 Mistakes</span>
+            <br>
+            <span class="bounce-effect">Beginners Make in HTML</span>
+        </h1>
+
+        <p class="text-lg md:text-xl text-center max-w-2xl mx-auto mb-12 opacity-0 animate-fadeIn animate-delay-300">
+            Balancing the fundamentals of web development
+        </p>
+
+        <a href="#content" class="opacity-0 animate-fadeIn animate-delay-500">
+            <svg class="w-10 h-10 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+        </a>
+    </header>
+
+    <main id="content" class="container mx-auto px-6 py-20 max-w-4xl">
+        <section class="mb-24 section">
+            <p class="text-lg mb-8">
+                HTML seems simple at first glance, but beginners often fall into common traps that can lead to poorly
+                structured documents, accessibility issues, and maintenance headaches. Here are the top 5 mistakes to
+                avoid as you begin your web development journey.
+            </p>
+            <div class="w-full h-px bg-gray-300 dark:bg-gray-700 my-12"></div>
+        </section>
+
+        <section class="mb-24 section">
+            <h2 class="text-3xl font-bold mb-4 bounce-effect">1. Missing Doctype Declaration</h2>
+            <div class="title-line mb-6"></div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="mb-4">
+                        The doctype declaration tells browsers which version of HTML your document uses. Without it,
+                        browsers may render your page in "quirks mode," leading to inconsistent styling and layout
+                        issues.
+                    </p>
+                    <p>
+                        Always include <code
+                            class="bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">&lt;!DOCTYPE html&gt;</code> as the
+                        very first line of your HTML documents.
+                    </p>
+                </div>
+                <div class="p-6 rounded-lg" style="background-color: var(--code-bg);">
+                    <pre class="text-sm overflow-x-auto"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Correct Document Structure&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Your content here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24 section">
+            <h2 class="text-3xl font-bold mb-4 bounce-effect">2. Improper Nesting of Elements</h2>
+            <div class="title-line mb-6"></div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="mb-4">
+                        HTML elements must be properly nested - the first tag opened should be the last tag closed.
+                        Improper nesting can cause rendering issues and make your code harder to maintain.
+                    </p>
+                    <p>
+                        Always ensure your tags are closed in the reverse order they were opened.
+                    </p>
+                </div>
+                <div class="p-6 rounded-lg" style="background-color: var(--code-bg);">
+                    <pre class="text-sm overflow-x-auto"><code>&lt;!-- Incorrect --&gt;
+&lt;p&gt;This is &lt;strong&gt;bold text&lt;/p&gt;&lt;/strong&gt;
+
+&lt;!-- Correct --&gt;
+&lt;p&gt;This is &lt;strong&gt;bold text&lt;/strong&gt;&lt;/p&gt;
+
+&lt;!-- Incorrect --&gt;
+&lt;div&gt;&lt;p&gt;Paragraph inside div&lt;/div&gt;&lt;/p&gt;
+
+&lt;!-- Correct --&gt;
+&lt;div&gt;&lt;p&gt;Paragraph inside div&lt;/p&gt;&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24 section">
+            <h2 class="text-3xl font-bold mb-4 bounce-effect">3. Using Deprecated Tags</h2>
+            <div class="title-line mb-6"></div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="mb-4">
+                        HTML evolves over time, and some tags become deprecated in favor of newer, semantically better
+                        alternatives. Using deprecated tags can lead to accessibility issues and future compatibility
+                        problems.
+                    </p>
+                    <p>
+                        Avoid tags like <code
+                            class="bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">&lt;font&gt;</code>, <code
+                            class="bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">&lt;center&gt;</code>, and <code
+                            class="bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">&lt;strike&gt;</code> in favor of CSS
+                        and modern semantic tags.
+                    </p>
+                </div>
+                <div class="p-6 rounded-lg" style="background-color: var(--code-bg);">
+                    <pre class="text-sm overflow-x-auto"><code>&lt;!-- Deprecated --&gt;
+&lt;font color="red"&gt;Warning!&lt;/font&gt;
+&lt;center&gt;Centered text&lt;/center&gt;
+&lt;strike&gt;Old price&lt;/strike&gt;
+
+&lt;!-- Modern equivalent --&gt;
+&lt;span style="color: red;"&gt;Warning!&lt;/span&gt;
+&lt;div style="text-align: center;"&gt;Centered text&lt;/div&gt;
+&lt;del&gt;Old price&lt;/del&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24 section">
+            <h2 class="text-3xl font-bold mb-4 bounce-effect">4. Inline Styling Overuse</h2>
+            <div class="title-line mb-6"></div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="mb-4">
+                        While inline styles (using the style attribute) can be convenient for quick tests, they make
+                        maintenance difficult and violate the separation of concerns principle.
+                    </p>
+                    <p>
+                        Use external stylesheets or at least internal style tags in the head section for better
+                        organization and maintainability.
+                    </p>
+                </div>
+                <div class="p-6 rounded-lg" style="background-color: var(--code-bg);">
+                    <pre class="text-sm overflow-x-auto"><code>&lt;!-- Not ideal --&gt;
+&lt;p style="color: blue; font-size: 16px;"&gt;Some text&lt;/p&gt;
+
+&lt;!-- Better approach (Internal CSS) --&gt;
+&lt;!-- in &lt;head&gt; --&gt;
+&lt;style&gt;
+    .highlight {
+        color: blue;
+        font-size: 16px;
+    }
+&lt;/style&gt;
+&lt;!-- in &lt;body&gt; --&gt;
+&lt;p class="highlight"&gt;Some text&lt;/p&gt;
+
+&lt;!-- Best approach (External CSS) --&gt;
+&lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;p class="highlight"&gt;Some text&lt;/p&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24 section">
+            <h2 class="text-3xl font-bold mb-4 bounce-effect">5. Forgetting Alt Attributes for Images</h2>
+            <div class="title-line mb-6"></div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="mb-4">
+                        The alt attribute provides alternative text for images when they can't be displayed. It's
+                        crucial for accessibility (screen readers) and SEO.
+                    </p>
+                    <p>
+                        Always include meaningful alt text for images. For decorative images, use an empty alt attribute
+                        (<code class="bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded">alt=""</code>) rather than
+                        omitting it.
+                    </p>
+                </div>
+                <div class="p-6 rounded-lg" style="background-color: var(--code-bg);">
+                    <pre class="text-sm overflow-x-auto"><code>&lt;!-- Bad --&gt;
+&lt;img src="logo.png"&gt;
+
+&lt;!-- Better but not great --&gt;
+&lt;img src="logo.png" alt="logo"&gt;
+
+&lt;!-- Best --&gt;
+&lt;img src="logo.png" alt="Company XYZ logo"&gt;
+
+&lt;!-- Decorative image --&gt;
+&lt;img src="divider.png" alt=""&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="text-3xl font-bold mb-4 bounce-effect">Finding Balance in HTML</h2>
+            <div class="title-line mb-6"></div>
+            <p class="mb-6">
+                Like the yin and yang, good HTML requires balance - between structure and presentation, between
+                simplicity and completeness, between innovation and standards compliance.
+            </p>
+            <div class="flex justify-center my-12">
+                <svg class="yin-yang w-32 h-32" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
+                    <path d="M50,5 a45,45 0 0 1 0,90 a22.5,22.5 0 0 1 0,-45 a22.5,22.5 0 0 0 0,-45"
+                        fill="currentColor" />
+                    <circle cx="50" cy="27.5" r="5" class="fill-white dark:fill-black" />
+                    <circle cx="50" cy="72.5" r="5" class="fill-black dark:fill-white" />
+                </svg>
+            </div>
+            <p class="text-center italic">
+                "In the pursuit of knowledge, every day something is added. In the practice of the Tao, every day
+                something is dropped." - Lao Tzu
+            </p>
+        </section>
+    </main>
+
+    <footer class="py-12 text-center section">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="w-full h-px bg-gray-300 dark:bg-gray-700 my-6"></div>
+            <p class="mb-4">
+                © 2025 HTML Balance Blog. All rights reserved.
+            </p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">
+                Created with the harmony of black and white.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // // Theme toggle functionality
+        // const themeToggle = document.getElementById('themeToggle');
+        // const sunIcon = document.getElementById('sunIcon');
+        // const moonIcon = document.getElementById('moonIcon');
+
+        // // Check for saved user preference or use system preference
+        // if (localStorage.getItem('color-theme') === 'dark' ||
+        //     (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        //     document.documentElement.classList.add('dark');
+        //     sunIcon.classList.add('hidden');
+        //     moonIcon.classList.remove('hidden');
+        // } else {
+        //     document.documentElement.classList.remove('dark');
+        //     sunIcon.classList.remove('hidden');
+        //     moonIcon.classList.add('hidden');
+        // }
+
+        // themeToggle.addEventListener('click', () => {
+        //     // Toggle icons
+        //     sunIcon.classList.toggle('hidden');
+        //     moonIcon.classList.toggle('hidden');
+
+        //     // Toggle theme
+        //     document.documentElement.classList.toggle('dark');
+
+        //     if (document.documentElement.classList.contains('dark')) {
+        //         localStorage.setItem('color-theme', 'dark');
+        //     } else {
+        //         localStorage.setItem('color-theme', 'light');
+        //     }
+        // });
+
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        let mouseX = 0, mouseY = 0;
+        let posX = 0, posY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            // Create ink trail
+            if (Math.random() > 0.7) {
+                createInkTrail(e.clientX, e.clientY);
+            }
+        });
+
+        function createInkTrail(x, y) {
+            const trail = document.createElement('div');
+            trail.className = 'ink-trail';
+            trail.style.left = `${x}px`;
+            trail.style.top = `${y}px`;
+
+            const size = Math.random() * 20 + 10;
+            trail.style.width = `${size}px`;
+            trail.style.height = `${size}px`;
+            trail.style.filter = `blur(${Math.random() * 2}px)`;
+
+            document.body.appendChild(trail);
+
+            setTimeout(() => {
+                trail.remove();
+            }, 2000);
+        }
+
+        function animateCursor() {
+            posX += (mouseX - posX) / 6;
+            posY += (mouseY - posY) / 6;
+
+            cursor.style.left = `${mouseX}px`;
+            cursor.style.top = `${mouseY}px`;
+            cursorFollower.style.left = `${posX}px`;
+            cursorFollower.style.top = `${posY}px`;
+
+            requestAnimationFrame(animateCursor);
+        }
+
+        if (!window.matchMedia("(max-width: 768px)").matches) {
+            animateCursor();
+        }
+
+        // Cursor interactions
+        document.querySelectorAll('a, button, .bounce-effect').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('active');
+                cursorFollower.style.width = '30px';
+                cursorFollower.style.height = '30px';
+            });
+
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('active');
+                cursorFollower.style.width = '40px';
+                cursorFollower.style.height = '40px';
+            });
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Initial header animation trigger
+        window.addEventListener('load', () => {
+            document.querySelector('header h1').style.opacity = '1';
+            document.querySelector('header p').style.opacity = '1';
+            document.querySelector('header a').style.opacity = '1';
+        });
+
+    </script>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIcon = document.getElementById('moonIcon');
+
+    function updateThemeIcons(isDark) {
+        if (isDark) {
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+    }
+
+    const userPref = localStorage.getItem('color-theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDarkMode = userPref === 'dark' || (!userPref && systemDark);
+
+    document.documentElement.classList.toggle('dark', isDarkMode);
+    updateThemeIcons(isDarkMode);
+
+    themeToggle.addEventListener('click', () => {
+        const currentlyDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('color-theme', currentlyDark ? 'dark' : 'light');
+        updateThemeIcons(currentlyDark);
+    });
+</script>
+
+
+
+
+</body>
+
+</html>

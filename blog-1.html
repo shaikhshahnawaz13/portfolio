@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why I Chose Tech | Shahnawaz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f0f0f0;
+            --text-color: #000000;
+            --accent-color: #222222;
+            --cursor-color: #000000;
+        }
+
+        .dark {
+            --primary-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --text-color: #ffffff;
+            --accent-color: #e0e0e0;
+            --cursor-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        .cursor {
+            position: fixed;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--cursor-color);
+            pointer-events: none;
+            mix-blend-mode: difference;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--cursor-color);
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cursor-follower.interactive {
+            box-shadow: 0 0 15px var(--cursor-color);
+            border-width: 2px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion) {
+            .animate-float,
+            [data-aos] {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        .animate-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, var(--accent-color) 1px, transparent 1px),
+                              linear-gradient(to bottom, var(--accent-color) 1px, transparent 1px);
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 40px 40px;
+            }
+        }
+
+        .animate-yinyang {
+            position: relative;
+        }
+
+        .animate-yinyang::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, transparent 60%, var(--accent-color) 60%),
+                        radial-gradient(circle, var(--accent-color) 30%, transparent 30%);
+            background-size: 200% 200%;
+            background-position: 50% 50%;
+            opacity: 0.05;
+            animation: yinYangRotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes yinYangRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .section-animate {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .section-visible {
+            /* Same as default, just here for JS toggling */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Only apply animations if JS is enabled */
+        .js-enabled .section-animate {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @media (max-width: 768px) {
+            .cursor, .cursor-follower {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="relative overflow-x-hidden">
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="fixed top-6 right-6 z-50 p-2 rounded-full backdrop-blur-lg bg-white/80 dark:bg-black/80 hover:bg-white dark:hover:bg-black transition-all duration-300 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl hover:scale-110">
+        <svg id="sun-icon" class="w-5 h-5 text-gray-800 dark:text-gray-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg id="moon-icon" class="w-5 h-5 text-gray-800 dark:text-gray-200 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden backdrop-blur-lg bg-white dark:bg-black bg-opacity-90 dark:bg-opacity-90">
+        <div class="container mx-auto px-6 py-20 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-black to-gray-600 dark:from-white dark:to-gray-300" data-aos="fade-up" data-aos-duration="800">Why I Chose Tech</h1>
+            <div class="text-xl md:text-2xl font-medium max-w-3xl mx-auto text-gray-700 dark:text-gray-300 h-12 flex items-center justify-center" id="typing-subtitle"></div>
+            <div class="mt-12" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
+                <a href="#content" class="inline-block px-6 py-3 rounded-full font-medium bg-black text-white dark:bg-white dark:text-black hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl animate-float">Explore My Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="content" class="container mx-auto px-6 py-20">
+        <!-- The Spark -->
+        <section id="spark" class="section-animate mb-32" data-aos="fade-up">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-10 group">
+                    <span class="text-3xl mr-4 transition-transform duration-300 group-hover:scale-110">🔥</span>
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight border-b-2 border-transparent hover:border-black dark:hover:border-white transition-all duration-300 inline-block">The Spark</h2>
+                </div>
+                <div class="space-y-6 text-lg">
+                    <p>My fascination with technology began at age 12 when I first disassembled an old radio. The intricate circuitry and the way components communicated fascinated me beyond words.</p>
+                    <p>This curiosity evolved into a passion when I built my first computer at 15, learning through trial and error how hardware and software interact to create the digital experiences we take for granted.</p>
+                    <p>What truly cemented my path was realizing technology's potential to <span class="font-bold">solve real-world problems</span> at scale. The ability to create something from nothing using just logic and creativity felt like magic.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Academic Milestones -->
+        <section id="academics" class="section-animate mb-32">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-10">
+                    <span class="text-3xl mr-4">📚</span>
+                    <h2 class="text-3xl md:text-4xl font-bold">Academic Milestones</h2>
+                </div>
+                <div class="space-y-8">
+                    <div class="border-l-2 border-gray-300 dark:border-gray-600 pl-6">
+                        <h3 class="text-2xl font-semibold mb-2">Bachelor's in Computer Science</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-2">University of Technology, 2015-2019</p>
+                        <p>Specialized in Artificial Intelligence and Data Structures, graduating with honors. My thesis on neural network optimization won the department's innovation award.</p>
+                    </div>
+                    <div class="border-l-2 border-gray-300 dark:border-gray-600 pl-6">
+                        <h3 class="text-2xl font-semibold mb-2">Machine Learning Certification</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-2">Deep Learning Institute, 2020</p>
+                        <p>Completed advanced coursework in TensorFlow and PyTorch, building models for computer vision and natural language processing applications.</p>
+                    </div>
+                    <div class="border-l-2 border-gray-300 dark:border-gray-600 pl-6">
+                        <h3 class="text-2xl font-semibold mb-2">Continuous Learning</h3>
+                        <p>I dedicate at least 10 hours monthly to staying current through platforms like Coursera, edX, and research papers. The field moves fast, and so must we.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech I Love -->
+        <section id="tech" class="section-animate mb-32">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-10">
+                    <span class="text-3xl mr-4">💻</span>
+                    <h2 class="text-3xl md:text-4xl font-bold">Tech I Love</h2>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                        <h3 class="text-xl font-semibold mb-2">React & Next.js</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Building performant, accessible web applications.</p>
+                    </div>
+                    <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2">Python</h3>
+                        <p class="text-gray-600 dark:text-gray-400">For data analysis, automation, and backend services.</p>
+                    </div>
+                    <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2">TensorFlow</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Implementing machine learning models.</p>
+                    </div>
+                    <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2">Docker</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Containerization and deployment workflows.</p>
+                    </div>
+                    <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2">GraphQL</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Efficient API design and data fetching.</p>
+                    </div>
+                    <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2">Rust</h3>
+                        <p class="text-gray-600 dark:text-gray-400">For performance-critical systems programming.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects That Define Me -->
+        <section id="projects" class="section-animate mb-32">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-10">
+                    <span class="text-3xl mr-4">🚀</span>
+                    <h2 class="text-3xl md:text-4xl font-bold">Projects That Define Me</h2>
+                </div>
+                <div class="space-y-12">
+                    <div class="border-b border-gray-200 dark:border-gray-700 pb-12">
+                        <h3 class="text-2xl font-semibold mb-4">AI-Powered Accessibility Tool</h3>
+                        <p class="mb-6">Developed a real-time captioning system for hearing-impaired students that integrates with video conferencing platforms. Uses NLP to improve accuracy in technical subjects.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-[#fffdf2] text-[#111827] dark:bg-[#1f1f1f] dark:text-white rounded-full text-sm">
+Python</span>
+                            <span class="px-3 py-1 bg-[#fffdf2] text-[#111827] dark:bg-[#1f1f1f] dark:text-white rounded-full text-sm">
+TensorFlow</span>
+                            <span class="px-3 py-1 bg-[#fffdf2] text-[#111827] dark:bg-[#1f1f1f] dark:text-white rounded-full text-sm">
+WebRTC</span>
+                        </div>
+                    </div>
+                    <div class="border-b border-gray-200 dark:border-gray-700 pb-12">
+                        <h3 class="text-2xl font-semibold mb-4">Sustainable Energy Dashboard</h3>
+                        <p class="mb-6">Created an interactive visualization platform for municipal energy consumption data, helping cities identify inefficiencies and plan renewable energy transitions.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-[#fffdf2] text-[#111827] dark:bg-[#1f1f1f] dark:text-white rounded-full text-sm">
+React</span>
+                            <span class="px-3 py-1 bg-[#fffdf2] text-[#111827] dark:bg-[#1f1f1f] dark:text-white rounded-full text-sm">
+D3.js</span>
+                            <span class="px-3 py-1 bg-[#fffdf2] text-[#111827] dark:bg-[#1f1f1f] dark:text-white rounded-full text-sm">
+Node.js</span>
+                        </div>
+                    </div>
+                    <div class="pb-12">
+                        <h3 class="text-2xl font-semibold mb-4">Open Source Contributions</h3>
+                        <p class="mb-6">Regular contributor to several open-source projects, including performance optimizations for a popular machine learning library and accessibility improvements for a front-end framework.</p>
+                        <div class="flex flex-wrap gap-2">
+                           <span class="px-3 py-1 bg-[#fffdf2] text-[#111827] dark:bg-[#1f1f1f] dark:text-white rounded-full text-sm">
+Open Source</span>
+                           <span class="px-3 py-1 bg-[#fffdf2] text-[#111827] dark:bg-[#1f1f1f] dark:text-white rounded-full text-sm">
+Community</span>
+                           <span class="px-3 py-1 bg-[#fffdf2] text-[#111827] dark:bg-[#1f1f1f] dark:text-white rounded-full text-sm">
+Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Soft Skills -->
+        <section id="skills" class="section-animate mb-32">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-10">
+                    <span class="text-3xl mr-4">🧠</span>
+                    <h2 class="text-3xl md:text-4xl font-bold">Soft Skills That Complement</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-3">Problem-Solving Mindset</h3>
+                        <p>I approach challenges systematically, breaking them into manageable components while maintaining sight of the bigger picture.</p>
+                    </div>
+                    <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-3">Effective Communication</h3>
+                        <p>Translating technical concepts for non-technical stakeholders is crucial for alignment and project success.</p>
+                    </div>
+                    <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-3">Adaptability</h3>
+                        <p>In tech, change is constant. I thrive in evolving environments, viewing new paradigms as opportunities rather than obstacles.</p>
+                    </div>
+                    <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-3">Collaborative Spirit</h3>
+                        <p>The best solutions emerge from diverse perspectives. I actively seek and incorporate feedback throughout development.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Looking Forward -->
+        <section id="future" class="section-animate mb-32">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-10">
+                    <span class="text-3xl mr-4">🔭</span>
+                    <h2 class="text-3xl md:text-4xl font-bold">Looking Forward</h2>
+                </div>
+                <div class="space-y-6 text-lg">
+                    <p>My vision for the future involves working at the intersection of <span class="font-bold">AI and human-computer interaction</span>, creating technologies that augment human capabilities without replacing the human element.</p>
+                    <p>I'm particularly excited about:</p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Developing more intuitive programming interfaces that lower barriers to tech creation</li>
+                        <li>Ethical AI systems that explain their decision-making processes</li>
+                        <li>Technologies that bridge the digital divide and make computing more accessible</li>
+                    </ul>
+                    <p>Ultimately, I measure my success not by technical complexity alone, but by <span class="font-bold">tangible positive impact</span> on people's lives and work.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-80 backdrop-blur-lg">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-xl md:text-2xl font-medium max-w-3xl mx-auto mb-10 text-gray-800 dark:text-gray-200">
+                "Technology isn't just a career path, it's a mindset of curiosity, growth, and creativity."
+            </p>
+            <p class="text-gray-500 dark:text-gray-400 text-sm tracking-wider">
+                © 2023 SHAHNAWAZ • ALL RIGHTS RESERVED
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize animations
+        AOS.init({
+            duration: 800,
+            once: true,
+            disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        });
+
+        // Add JS-enabled class
+        document.documentElement.classList.add('js-enabled');
+
+        // Typing animation for subtitle
+        const subtitle = "Exploring my journey into technology and what keeps me motivated in this ever-evolving field.";
+        const typingElement = document.getElementById('typing-subtitle');
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < subtitle.length) {
+                typingElement.innerHTML += subtitle.charAt(i);
+                i++;
+                setTimeout(typeWriter, Math.random() * 50 + 30);
+            } else {
+                typingElement.innerHTML += '<span class="typing-cursor">|</span>';
+            }
+        }
+
+        // Only animate if not prefers-reduced-motion
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            setTimeout(typeWriter, 1000);
+        } else {
+            typingElement.textContent = subtitle;
+        }
+        
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                localStorage.setItem('color-theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                localStorage.setItem('color-theme', 'light');
+            }
+        }
+
+        // Initialize theme
+        const storedTheme = localStorage.getItem('color-theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+            applyTheme(true);
+        } else {
+            applyTheme(false);
+        }
+
+        // Toggle handler
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark');
+            applyTheme(isDark);
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        document.addEventListener('mouseenter', () => {
+            cursor.style.opacity = '1';
+            cursorFollower.style.opacity = '1';
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+            cursorFollower.style.opacity = '0';
+        });
+
+        const interactiveElements = document.querySelectorAll('a, button, input, textarea, [role="button"]');
+        
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorFollower.style.width = '48px';
+                cursorFollower.style.height = '48px';
+                cursorFollower.classList.add('interactive');
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursorFollower.style.width = '32px';
+                cursorFollower.style.height = '32px';
+                cursorFollower.classList.remove('interactive');
+            });
+        });
+
+        // Animation and Interaction Setup
+        function setupAnimations() {
+            const animateSections = document.querySelectorAll('.section-animate');
+            const interactiveElements = document.querySelectorAll('a, button, input, textarea, [role="button"]');
+
+            // Initialize section animations
+            animateSections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                section.style.transitionDelay = `${index * 0.1}s`;
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            });
+
+            animateSections.forEach(section => observer.observe(section));
+
+            // Cursor effects for interactive elements
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorFollower.style.width = '48px';
+                    cursorFollower.style.height = '48px';
+                    cursorFollower.classList.add('interactive');
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    cursorFollower.style.width = '32px';
+                    cursorFollower.style.height = '32px';
+                    cursorFollower.classList.remove('interactive');
+                });
+            });
+        }
+
+        // Initialize after DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            setupAnimations();
+            
+            // Ensure AOS and our animations don't conflict
+            AOS.init({
+                duration: 800,
+                once: true,
+                disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
