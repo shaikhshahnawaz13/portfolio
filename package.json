@@ -1,0 +1,46 @@
+{
+  "name": "shahnawaz-portfolio",
+  "version": "2.0.0",
+  "description": "Personal portfolio of Shaikh Shahnawaz Ahmed — Full Stack Developer, BSc IT Student, Builder.",
+  "author": "Shaikh Shahnawaz Ahmed <sshaikhshahnwaaz84@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://shaikhshahnawaz13.github.io/portfolio",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shaikhshahnawaz13/portfolio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shaikhshahnawaz13/portfolio/issues"
+  },
+  "keywords": [
+    "portfolio",
+    "web-developer",
+    "full-stack",
+    "bsc-it",
+    "mumbai",
+    "neo-brutalist",
+    "gsap",
+    "open-source"
+  ],
+  "scripts": {
+    "start": "npx serve . -l 3000",
+    "dev": "npx live-server --port=3000 --open=index.html",
+    "lint:html": "npx html-validate index.html",
+    "test": "node tests/portfolio.test.js",
+    "preview": "npx serve . -l 5000"
+  },
+  "devDependencies": {
+    "html-validate": "^8.0.0",
+    "live-server": "^1.2.2",
+    "serve": "^14.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
