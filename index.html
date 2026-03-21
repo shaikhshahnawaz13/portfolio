@@ -1437,6 +1437,8 @@ function handleForm(e){
 if(new URLSearchParams(location.search).get('sent') === 'true'){
   const btn = document.getElementById('fbtn');
   if(btn){ btn.textContent = '✓ Message Sent!'; btn.style.background = 'var(--g)'; btn.style.borderColor = 'var(--g)'; }
+  // Remove ?sent=true from URL so a refresh doesn't re-trigger this
+  history.replaceState(null, '', location.pathname);
 }
 
 /* ── KEYBOARD SHORTCUTS ─────────────────────────────────────── */
